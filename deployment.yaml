@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: python-execution-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: python-execution-api
+  template:
+    metadata:
+      labels:
+        app: python-execution-api
+    spec:
+      containers:
+      - name: python-execution-api
+        image: gcr.io/stacksync-460604/python-execution-api:latest
+        ports:
+        - containerPort: 8080
+        securityContext:
+          privileged: true  # Required for nsjail
+          capabilities:
+            add:
+            - SYS_ADMIN  # Required for namespace creation
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "200m"
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: python-execution-api
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8080
+  selector:
+    app: python-execution-api 

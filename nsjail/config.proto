@@ -1,0 +1,39 @@
+name: "python-execution"
+description: "Python code execution sandbox"
+
+mount {
+  src: "/"
+  dst: "/"
+  is_bind: true
+  rw: false
+}
+
+mount {
+  src: "/tmp"
+  dst: "/tmp"
+  is_bind: true
+  rw: true
+}
+
+mount {
+  src: "/app"
+  dst: "/app"
+  is_bind: true
+  rw: true
+}
+
+envar: "PATH=/usr/local/bin:/usr/bin:/bin"
+envar: "PYTHONPATH=/usr/local/lib/python3.11/site-packages:/app"
+
+rlimit_as: 134217728  # 128MB
+rlimit_core: 0
+rlimit_cpu: 10  # 10 seconds
+rlimit_fsize: 1048576  # 1MB
+rlimit_nofile: 64
+rlimit_nproc: 32
+
+time_limit: 10  # 10 seconds
+
+mode: ONCE
+hostname: "python-execution"
+
