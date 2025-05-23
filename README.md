@@ -39,26 +39,6 @@ The response will be in the following format:
 }
 ```
 
-## Development
-
-For local development without Docker:
-
-1. Create a virtual environment:
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-```
-
-2. Install dependencies:
-```bash
-pip install -r requirements.txt
-```
-
-3. Run the application:
-```bash
-python app/main.py
-```
-
 ## Security Notes
 
 - The current implementation is a basic version without nsjail integration
