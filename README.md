@@ -27,7 +27,7 @@ Send a POST request to `/execute` with a JSON body containing the Python script:
 curl -X POST http://localhost:8080/execute \
   -H "Content-Type: application/json" \
   -d '{
-    "script": "def main():\n    print(\"Hello, World!\")\n    return 42"
+  "script": "import numpy as np\ndef main():\n    arr = np.array([1,2,3])\n    return {'sum': int(arr.sum())}"
   }'
 ```
 
